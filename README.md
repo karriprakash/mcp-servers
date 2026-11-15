@@ -3,8 +3,15 @@
 A modular ecosystem of production-ready MCP servers, AI integrations,
 automation tools, and intelligent agent workflows.
 
-> **Project status:** This repository is the initial monorepo scaffold.
-> Server implementations and runnable containers will be added incrementally.
+> **Project status:** Early scaffold. Servers are added incrementally.
+
+## Servers
+
+| Server | Status | Description |
+|---|---|---|
+| [`git-pulse-adda`](servers/git-pulse-adda/README.md) | runnable (Python, Docker) | Live GitHub profile, top repos and language metrics for a resume dashboard |
+| `wedding-cinematic-studio` | placeholder | Wedding-film production workflows |
+| `video-production`, `ai-media-tools`, `automation` | placeholder | Reserved |
 
 ## Repository layout
 
@@ -28,12 +35,12 @@ runtime, configuration, tools, and deployment options in its own directory.
 
 ## Getting started
 
-The scaffold does not yet include runnable servers or container services.
-Python development requires Python 3.11 or newer. Run the initial syntax check
-from the repository root:
+Only `git-pulse-adda` is runnable so far; see its README. Python development
+requires Python 3.11 or newer. From the repository root:
 
 ```bash
 python -m compileall -q servers shared tests
+python -m pytest -q
 ```
 
 TypeScript development requires Node.js 20 or newer:
@@ -43,10 +50,10 @@ npm ci
 npm run typecheck
 ```
 
-Use Docker Compose as server services are added:
+Run the containerised servers with Docker Compose:
 
 ```bash
-docker compose up --build
+GITHUB_TOKEN=... docker compose up --build   # git-pulse-adda on http://localhost:8080/mcp
 ```
 
 ## Development principles

@@ -19,6 +19,10 @@ jobs:
           python-version: "3.11"
       - name: Compile Python sources
         run: python -m compileall -q servers shared tests
+      - name: Run tests
+        run: |
+          python -m pip install pytest
+          python -m pytest -q
 
   typescript:
     name: TypeScript typecheck
