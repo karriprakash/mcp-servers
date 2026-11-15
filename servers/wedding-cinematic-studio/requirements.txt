@@ -1,0 +1,11 @@
+mcp>=1.2
+numpy
+opencv-python-headless
+pillow
+# optional: AI video generation through Google Veo
+google-genai>=1.0
+# optional: ArcFace face-identity QC (falls back to a weaker OpenCV check without it)
+# insightface
+# onnxruntime
+# dev
+pytest

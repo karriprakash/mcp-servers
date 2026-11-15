@@ -1,0 +1,45 @@
+{
+  "name": "south_indian_scroll_reveal",
+  "description": "Vertical 9:16 announcement: couple greet, hug, lift and twirl, pull a rope, a scroll unrolls to reveal the real wedding card, confetti, final namaste. The card is composited from your own image so its text is never distorted.",
+  "variables": {
+    "groom_name": "Surya",
+    "bride_name": "Vandana",
+    "event_date": "Wednesday, 23 December 2026",
+    "muhurtham": "7:44 PM",
+    "venue": "K.S.R. Function Hall, Seethammadhara",
+    "city": "Visakhapatnam",
+    "setting": "Warm dark-maroon festive backdrop with golden bokeh, glowing diyas and marigold garlands at the corners, soft cinematic golden light."
+  },
+  "style": "Vertical 9:16 Pixar-style 3D animated video, smooth 24fps cinematic motion, expressive but natural body language.",
+  "characters": {
+    "groom": "Slim athletic young man. Face, curly black hair, moustache and short beard EXACTLY as in the reference photos, red bindi. Maroon-gold embroidered kurta, cream dhoti, rose garland.",
+    "bride": "Slim young woman. Face, smile, hair and forehead jewellery EXACTLY as in the reference photos, red bindi. Orange and purple silk saree, gold jewellery, red bangles, rose garland."
+  },
+  "rules": "Strict identity lock on both faces, no face morphing, natural slim body proportions (no belly, no oversized head or body), no extra people, no on-screen text, no watermark, no logos.",
+  "negative_prompt": "overweight, chubby, big belly, distorted face, face morphing, extra fingers, extra people, text, subtitles, watermark, logo, blurry, low quality",
+  "scenes": [
+    {
+      "id": "s1",
+      "title": "Greeting, hug, lift and twirl",
+      "kind": "ai_clip",
+      "duration": 6,
+      "action": "0-1.5s both stand side by side smiling and greet with namaste. 1.5-3s they share a warm hug. 3-4.5s the groom lifts the bride by the waist and spins her smoothly. 4.5-6s the bride lands and twirls gracefully while the groom claps with joy."
+    },
+    {
+      "id": "s2",
+      "title": "Rope pull and scroll reveal",
+      "kind": "ai_clip",
+      "duration": 8,
+      "action": "0-1.5s the bride waves at the camera, then skips to a golden-tasselled rope hanging on the right. 1.5-2.5s she pulls the rope firmly while the groom watches excitedly. 2.5-8s a plain blank cream scroll unrolls from a wooden rod at the top centre of the frame (leave it blank, no writing). Slow steady camera push-in while the couple stand happily beside it.",
+      "post": {"type": "card_reveal", "reveal_start": 3.0, "reveal_end": 6.5}
+    },
+    {
+      "id": "s3",
+      "title": "Confetti burst and final namaste",
+      "kind": "ai_clip",
+      "duration": 6,
+      "action": "0-2s both jump with joy as a golden confetti and rose-petal burst fires around the hanging scroll. 2-4s both wave cheerfully at the camera. 4-6s final wide shot, both join palms in a warm namaste, smiling."
+    }
+  ],
+  "assembly": {"size": "1080x1920", "fps": 24, "music": null}
+}

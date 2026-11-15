@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cinematic-wedding-studio-mcp"
+version = "2.1.0"
+description = "MCP server that turns couple photos + a wedding card into an animated announcement video, and saves the result as a reusable template."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2",
+    "numpy",
+    "opencv-python-headless",
+    "pillow",
+]
+
+[project.optional-dependencies]
+veo = ["google-genai>=1.0"]
+faceqc = ["insightface", "onnxruntime"]
+dev = ["pytest"]
+
+[project.scripts]
+wedding-studio-mcp = "src.server:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
