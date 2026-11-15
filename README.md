@@ -36,6 +36,13 @@ from the repository root:
 python -m compileall -q servers shared tests
 ```
 
+TypeScript development requires Node.js 20 or newer:
+
+```bash
+npm ci
+npm run typecheck
+```
+
 Use Docker Compose as server services are added:
 
 ```bash
