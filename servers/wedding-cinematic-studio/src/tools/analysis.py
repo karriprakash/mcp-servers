@@ -13,6 +13,14 @@ def adapter_status() -> dict:
     return _adapter_status()
 
 
+def hardware_check() -> dict:
+    """GPU/memory on this machine and which local video model fits it (ltx, wan) or whether to use the veo API."""
+    from ..adapters import hw
+
+    device, info = hw.detect_device()
+    return {"device": device, **info, "recommendation": hw.recommend(device, info)}
+
+
 def analyze_reference_video(path: str) -> dict:
     """Duration, size, fps and the main action beats (motion-energy peaks) of a reference reel."""
     info = motion_qc.video_info(path)
@@ -58,5 +66,5 @@ def check_clip_quality(video_path: str, person_photos: dict[str, list[str]] | No
 
 
 def register(mcp) -> None:
-    for fn in (adapter_status, analyze_reference_video, inspect_photo, check_clip_quality):
+    for fn in (adapter_status, hardware_check, analyze_reference_video, inspect_photo, check_clip_quality):
         mcp.tool()(fn)

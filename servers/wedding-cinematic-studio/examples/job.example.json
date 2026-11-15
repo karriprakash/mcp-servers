@@ -1,0 +1,16 @@
+{
+  "template": "south_indian_scroll_reveal",
+  "variables": {
+    "groom_name": "Groom",
+    "bride_name": "Bride",
+    "event_date": "Wednesday, 23 December 2026",
+    "muhurtham": "7:44 PM",
+    "venue": "Venue name",
+    "city": "City"
+  },
+  "card_png": "/inputs/card.png",
+  "reference_photos": ["/inputs/couple_namaste.jpg", "/inputs/couple_closeup.jpg"],
+  "person_photos": {"groom": ["/inputs/groom.jpg"], "bride": ["/inputs/bride.jpg"]},
+  "adapters": ["ltx"],
+  "music": null
+}

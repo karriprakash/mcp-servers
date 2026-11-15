@@ -1,0 +1,15 @@
+# Local AI video models (LTX-Video, Wan). Install after requirements.txt.
+# On NVIDIA GPUs the Docker image already ships a matching CUDA build of torch.
+# On a Mac, `pip install torch` gives the Apple (MPS) build.
+torch>=2.4
+diffusers>=0.33
+transformers>=4.46
+accelerate>=1.0
+sentencepiece
+protobuf
+huggingface_hub>=0.25
+imageio
+imageio-ffmpeg
+# optional ArcFace identity check (needs a C++ compiler to build)
+# insightface
+# onnxruntime

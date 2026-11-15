@@ -1,0 +1,9 @@
+# runtime data and downloaded weights: never commit these
+data/
+inputs/
+models/
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+.env

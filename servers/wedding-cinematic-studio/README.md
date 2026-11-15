@@ -15,8 +15,18 @@ announcement video, and keeps each finished project as a reusable template.
 | Google Veo adapter | **written, not run** (no API key was available); set `VEO_MODEL` to a model your key can use |
 | Face identity QC with `insightface` | **written, not run** (not installed here). Without it the check is skipped and says so |
 
-Wan, LTX, CogVideoX and ComfyUI adapters are not included yet. Add one by subclassing
-`VideoAdapter` in `src/adapters/` and registering it in `src/adapters/__init__.py`.
+| Local models `ltx` (LTX-Video) and `wan` (Wan 2.1), CLI, Docker, GCP and Mac scripts | **written, not yet run on a real GPU or Mac.** Plumbing (sizes, frame rules, CLI, downloader, compose files) is tested; the model calls are not |
+
+CogVideoX and ComfyUI adapters are not included. Add one by subclassing `VideoAdapter` in `src/adapters/` and registering it in `src/adapters/__init__.py`.
+
+## Run on a GPU
+
+| Where | Guide |
+|---|---|
+| Google Cloud GPU VM (L4 or A100, uses your credits) | [docs/GCP_GPU_GUIDE.md](docs/GCP_GPU_GUIDE.md) |
+| Apple-silicon Mac (native Metal GPU; Docker cannot use it) | [docs/MAC_GUIDE.md](docs/MAC_GUIDE.md) |
+
+Whole job from one file, no MCP client needed: `python -m src.cli examples/job.example.json --estimate`, then `--only-scene s1`, then without flags. Model weights are downloaded by `scripts/download_models.py` into a cache and are never committed to GitHub.
 
 ## Layout
 
@@ -41,7 +51,7 @@ pytest -q
 
 ## Tools
 
-- analysis: `adapter_status`, `analyze_reference_video`, `inspect_photo`, `check_clip_quality`
+- analysis: `adapter_status`, `hardware_check`, `analyze_reference_video`, `inspect_photo`, `check_clip_quality`
 - templates: `list_templates`, `get_template`, `save_template`, `create_project`, `save_project_as_template`
 - storyboard: `build_storyboard`
 - generation: `generate_scene`, `generate_all_scenes`, `project_status`

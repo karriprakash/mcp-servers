@@ -2,11 +2,15 @@ from __future__ import annotations
 
 from .base import SceneRequest, SceneResult, VideoAdapter
 from .local_compositor import LocalCompositorAdapter
+from .ltx import LTXAdapter
 from .veo import VeoAdapter
+from .wan import WanAdapter
 
 _REGISTRY: dict[str, type[VideoAdapter]] = {
-    "veo": VeoAdapter,
-    "local": LocalCompositorAdapter,
+    "veo": VeoAdapter,        # Google API (paid key), no GPU needed
+    "ltx": LTXAdapter,        # local model, 16 GB+ GPU or Apple MPS (slow)
+    "wan": WanAdapter,        # local model, 40 GB+ GPU recommended
+    "local": LocalCompositorAdapter,  # card reveal compositor, no AI
 }
 
 

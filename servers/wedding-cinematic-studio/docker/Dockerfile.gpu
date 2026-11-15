@@ -1,0 +1,35 @@
+# NVIDIA GPU image (Google Cloud L4/A100, AWS, any Linux box with an NVIDIA GPU).
+# Build context: servers/wedding-cinematic-studio
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+
+ARG FACE_QC=0
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONUNBUFFERED=1 \
+    HOME=/data/home \
+    HF_HOME=/data/hf \
+    WEDDING_STUDIO_HOME=/data/studio
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ffmpeg git \
+ && if [ "$FACE_QC" = "1" ]; then apt-get install -y --no-install-recommends build-essential; fi \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY requirements.txt requirements-gpu.txt ./
+# torch ships with the base image; install the rest
+RUN grep -v '^torch' requirements-gpu.txt > /tmp/rest.txt \
+ && pip install --no-cache-dir -r requirements.txt -r /tmp/rest.txt \
+ && if [ "$FACE_QC" = "1" ]; then pip install --no-cache-dir insightface onnxruntime; fi
+
+COPY src ./src
+COPY scripts ./scripts
+COPY templates ./templates
+COPY examples ./examples
+
+RUN useradd --uid 10001 --no-create-home app \
+ && mkdir -p /data && chown 10001:10001 /data
+USER 10001
+
+ENV MCP_TRANSPORT=streamable-http MCP_HOST=0.0.0.0 MCP_PORT=8000
+EXPOSE 8000
+CMD ["python", "-m", "src.server"]

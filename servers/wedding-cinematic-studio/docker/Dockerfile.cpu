@@ -1,0 +1,29 @@
+# Light image: no AI models. Card reveal, stitching, QC and the Veo API adapter.
+# Use this on a Mac (Docker on macOS cannot reach the Apple GPU) or any machine without an NVIDIA GPU.
+# Build context: servers/wedding-cinematic-studio
+FROM python:3.11-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    HOME=/data/home \
+    WEDDING_STUDIO_HOME=/data/studio
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src ./src
+COPY scripts ./scripts
+COPY templates ./templates
+COPY examples ./examples
+
+RUN useradd --uid 10001 --no-create-home app \
+ && mkdir -p /data && chown 10001:10001 /data
+USER 10001
+
+ENV MCP_TRANSPORT=streamable-http MCP_HOST=0.0.0.0 MCP_PORT=8000
+EXPOSE 8000
+CMD ["python", "-m", "src.server"]
